@@ -1,0 +1,8 @@
+print('Hello ');
+println("World!");
+
+println('{}', if (5 > 2) {
+    return "bigger";
+} else {
+    return "smaller";
+});
