@@ -1,5 +1,5 @@
 {
-  description = "A nix flake for the spling project";
+  description = "A nix flake for the splicks project";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -51,23 +51,23 @@
 
         cargoArtifacts = craneLib.buildDepsOnly commonArgs;
 
-        spling-pkg = craneLib.buildPackage (commonArgs // {
+        splicks-pkg = craneLib.buildPackage (commonArgs // {
           inherit cargoArtifacts;
           postInstall = ''
-            wrapProgram $out/bin/spling --prefix LD_LIBRARY_PATH : "${libPath}"
+            wrapProgram $out/bin/splicks --prefix LD_LIBRARY_PATH : "${libPath}"
           '';
         });
 
       in
       {
-        packages.default = spling-pkg;
+        packages.default = splicks-pkg;
 
         apps.default = flake-utils.lib.mkApp {
-          drv = spling-pkg;
+          drv = splicks-pkg;
         };
 
         devShells.default = craneLib.devShell {
-          inputsFrom = [ spling-pkg ];
+          inputsFrom = [ splicks-pkg ];
           LD_LIBRARY_PATH = libPath;
         };
       }
