@@ -1,0 +1,17 @@
+edition = "2024"
+max_width = 200
+hard_tabs = false
+tab_spaces = 2
+unstable_features = true
+
+reorder_imports = true
+reorder_modules = true
+group_imports = "StdExternalCrate"
+imports_granularity = "Item"
+
+struct_lit_single_line = false
+use_field_init_shorthand = false
+trailing_comma = "Never"
+
+wrap_comments = false
+format_code_in_doc_comments = true

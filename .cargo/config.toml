@@ -1,0 +1,47 @@
+[unstable]
+profile-rustflags = true
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+[target.x86_64-unknown-linux-musl]
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+[target.x86_64-pc-windows-msvc]
+linker = "rust-lld.exe"
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[profile.dev]
+opt-level = 0
+debug = 2
+panic = "unwind"
+
+[profile.test]
+inherits = "dev"
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+panic = "abort"
+debug = 1
+strip = "symbols"
+rustflags = [
+  "-C", "target-cpu=haswell",
+]
+
+[profile.flash]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
+debug = 0
+rustflags = [
+  "-C", "target-cpu=native",
+]
+
+[lints.clippy]
+unwrap_used = "warn"
+expect_used = "warn"
+pedantic = "warn"
+nursery = "warn"
