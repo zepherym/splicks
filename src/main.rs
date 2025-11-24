@@ -17,5 +17,5 @@ fn main() {
 
     let input = fs::read_to_string(&cli.input_path).expect("Should be able to read file");
 
-    let _tokens = lexer::to_token(&input);
+    let _tokens = lexer::lexer(&input);
 }
